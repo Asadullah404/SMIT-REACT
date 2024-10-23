@@ -8,12 +8,12 @@ const UserDetail = () => {
     return (
         <div className="bg-gray-900 min-h-screen py-8 px-4 md:px-10 text-white">
             <div className="py-5 flex justify-between items-center">
-                <h1 className="text-2xl text-pink-300 font-extrabold">All Users</h1>
+                <h1 className="text-2xl text-white font-extrabold">All Users</h1>
             </div>
 
             <div className="w-full overflow-x-auto bg-gray-800 shadow-md rounded-lg">
                 <table className="w-full text-left border-collapse text-gray-300">
-                    <thead className="bg-gray-700 text-pink-300 font-semibold">
+                    <thead className="bg-gray-700 font-semibold text-gray-200">
                         <tr>
                             <th className="h-12 px-6">S.No.</th>
                             <th className="h-12 px-6">Name</th>
@@ -27,12 +27,12 @@ const UserDetail = () => {
                         {getAllUser.map((value, index) => {
                             return (
                                 <tr key={index} className="border-b border-gray-600 hover:bg-gray-700 transition">
-                                    <td className="h-12 px-6">{index + 1}</td>
-                                    <td className="h-12 px-6 capitalize">{value.name}</td>
-                                    <td className="h-12 px-6 text-blue-400 cursor-pointer hover:underline">{value.email}</td>
-                                    <td className="h-12 px-6 text-blue-400 cursor-pointer hover:underline">{value.uid}</td>
-                                    <td className="h-12 px-6 capitalize">{value.role}</td>
-                                    <td className="h-12 px-6">{value.date}</td>
+                                    <td className="h-12 px-6 text-white">{index + 1}</td>
+                                    <td className="h-12 px-6 text-gray-300 capitalize">{value.name}</td>
+                                    <td className="h-12 px-6 text-gray-400 cursor-pointer hover:text-white hover:underline">{value.email}</td>
+                                    <td className="h-12 px-6 text-gray-400 cursor-pointer hover:text-white hover:underline">{value.uid}</td>
+                                    <td className="h-12 px-6 text-gray-300 capitalize">{value.role}</td>
+                                    <td className="h-12 px-6 text-gray-300">{value.date}</td>
                                 </tr>
                             );
                         })}

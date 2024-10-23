@@ -9,7 +9,7 @@ const OrderDetail = () => {
         <div className="bg-gray-900 min-h-screen p-8 text-white">
             <div className="py-5">
                 {/* Title */}
-                <h1 className="text-2xl text-pink-300 font-bold">All Orders</h1>
+                <h1 className="text-2xl text-white font-bold">All Orders</h1>
             </div>
 
             {/* Table */}
