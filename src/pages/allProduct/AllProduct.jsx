@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 import Layout from "../../components/layout/Layout";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import myContext from "../../context/myContext";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
@@ -13,6 +13,10 @@ const AllProduct = () => {
     const { loading, getAllProduct } = context;
     const cartItems = useSelector((state) => state.cart);
     const dispatch = useDispatch();
+
+    const [minPrice, setMinPrice] = useState(""); // State for minimum price filter
+    const [maxPrice, setMaxPrice] = useState(""); // State for maximum price filter
+    const [sortOrder, setSortOrder] = useState(""); // State for sorting order
 
     const addCart = (item) => {
         dispatch(addToCart(item));
@@ -28,22 +32,80 @@ const AllProduct = () => {
         localStorage.setItem('cart', JSON.stringify(cartItems));
     }, [cartItems]);
 
+    // Filter products based on price range and sort them
+    const filteredProducts = getAllProduct
+        .filter((item) => {
+            if (minPrice && maxPrice) {
+                return item.price >= parseFloat(minPrice) && item.price <= parseFloat(maxPrice);
+            }
+            if (minPrice) {
+                return item.price >= parseFloat(minPrice);
+            }
+            if (maxPrice) {
+                return item.price <= parseFloat(maxPrice);
+            }
+            return true;
+        })
+        .sort((a, b) => {
+            if (sortOrder === "low-to-high") {
+                return a.price - b.price;
+            }
+            if (sortOrder === "high-to-low") {
+                return b.price - a.price;
+            }
+            return 0;
+        });
+
     return (
         <Layout>
             <div className="py-8 bg-gray-900 text-white">
                 {/* Heading */}
-                <div className="">
+                <div>
                     <h1 className="text-center mb-5 text-2xl font-semibold">All Products</h1>
                 </div>
 
-                {/* Main */}
+                {/* Filter and Sort Section */}
+                <div className="flex flex-wrap justify-between items-center mb-6 px-5 lg:px-0">
+                    {/* Price Range Filter */}
+                    <div className="flex gap-4">
+                        <input
+                            type="number"
+                            placeholder="Min Price"
+                            value={minPrice}
+                            onChange={(e) => setMinPrice(e.target.value)}
+                            className="px-4 py-2 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                        />
+                        <input
+                            type="number"
+                            placeholder="Max Price"
+                            value={maxPrice}
+                            onChange={(e) => setMaxPrice(e.target.value)}
+                            className="px-4 py-2 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                        />
+                    </div>
+
+                    {/* Sort Dropdown */}
+                    <div>
+                        <select
+                            value={sortOrder}
+                            onChange={(e) => setSortOrder(e.target.value)}
+                            className="px-4 py-2 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-pink-500"
+                        >
+                            <option value="">Sort by</option>
+                            <option value="low-to-high">Price: Low to High</option>
+                            <option value="high-to-low">Price: High to Low</option>
+                        </select>
+                    </div>
+                </div>
+
+                {/* Main Section */}
                 <section className="text-gray-400 body-font">
                     <div className="container px-5 lg:px-0 py-5 mx-auto">
                         <div className="flex justify-center">
                             {loading && <Loader />}
                         </div>
                         <div className="flex flex-wrap -m-4">
-                            {getAllProduct.map((item, index) => {
+                            {filteredProducts.map((item, index) => {
                                 const { id, title, price, productImageUrl } = item;
                                 return (
                                     <div key={index} className="p-4 w-full md:w-1/4">
@@ -93,6 +155,6 @@ const AllProduct = () => {
             </div>
         </Layout>
     );
-}
+};
 
 export default AllProduct;
