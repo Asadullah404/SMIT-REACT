@@ -68,7 +68,7 @@ const CategoryPage = () => {
                                                         {title.length > 25 ? title.substring(0, 25) + "..." : title}
                                                     </h1>
                                                     <h1 className="title-font text-lg font-medium text-white mb-3">
-                                                        ₹{price}
+                                                        Rs.{price}
                                                     </h1>
 
                                                     <div className="flex justify-center">
