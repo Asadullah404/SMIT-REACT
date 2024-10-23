@@ -6,11 +6,19 @@ import { useContext } from 'react';
 import myContext from '../../context/myContext';
 import Navbar from "../../components/navbar/Navbar"; // Import the Navbar
 import Footer from "../../components/footer/Footer"; // Import the Footer
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 
 const AdminDashboard = () => {
     const user = JSON.parse(localStorage.getItem('users'));
     const context = useContext(myContext);
     const { getAllProduct, getAllOrder, getAllUser } = context;
+    const navigate = useNavigate();
+
+    // Logout function
+    const handleLogout = () => {
+        localStorage.removeItem('users');
+        navigate('/login'); // Redirect to login page after logout
+    };
 
     return (
         <div className="bg-gray-900 text-white">
@@ -18,9 +26,18 @@ const AdminDashboard = () => {
             <Navbar />
 
             {/* Top */}
-            <div className="top mb-5 px-5 mt-5">
-                <div className="bg-gray-800 py-5 border border-gray-700 rounded-lg">
-                    <h1 className="text-center text-2xl font-bold text-white">Admin Dashboard</h1>
+            <div className="top mb-5 px-5 mt-5 flex justify-between items-center">
+                <div className="bg-gray-800 py-5 border border-gray-700 rounded-lg w-full text-center">
+                    <h1 className="text-2xl font-bold text-white">Admin Dashboard</h1>
+                </div>
+                {/* Logout Button */}
+                <div className="ml-5">
+                    <button
+                        onClick={handleLogout}
+                        className="bg-red-600 hover:bg-red-500 text-white px-4 py-2 rounded-lg font-bold"
+                    >
+                        Logout
+                    </button>
                 </div>
             </div>
 
