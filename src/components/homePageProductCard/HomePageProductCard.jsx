@@ -68,7 +68,7 @@ const HomePageProductCard = () => {
                                         {/* Product Info */}
                                         <div className="p-6">
                                             <h2 className="tracking-widest text-xs font-medium text-gray-500 mb-1">
-                                                E-PAKISTAN
+                                                SMIT
                                             </h2>
                                             <h1 className="text-lg font-semibold text-white mb-2">
                                                 {title.substring(0, 25)}

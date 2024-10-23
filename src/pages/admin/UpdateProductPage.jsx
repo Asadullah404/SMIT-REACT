@@ -5,8 +5,8 @@ import { Timestamp, doc, getDoc, setDoc } from "firebase/firestore";
 import { fireDB } from "../../firebase/FirebaseConfig";
 import toast from "react-hot-toast";
 import Loader from "../../components/loader/Loader";
-import Navbar from "../../components/navbar/Navbar"; // Import the Navbar
-import Footer from "../../components/footer/Footer"; // Import the Footer
+import Navbar from "../../components/navbar/Navbar"; // Ensure this component exists
+import Footer from "../../components/footer/Footer"; // Ensure this component exists
 
 const categoryList = [
     { name: 'fashion' },

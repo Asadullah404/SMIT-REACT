@@ -62,7 +62,7 @@ const AllProduct = () => {
                                                     {title.substring(0, 25)}
                                                 </h1>
                                                 <h1 className="title-font text-lg font-medium text-gray-200 mb-3">
-                                                    ₹{price}
+                                                    Rs.{price}
                                                 </h1>
 
                                                 <div className="flex justify-center">
